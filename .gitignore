@@ -16,3 +16,9 @@ dl_wsl.ps1
 download_wsl.ps1
 out.txt
 wsl_dl_result.txt
+yolov8n_saved_model/
+bus.jpg
+calibration_image_sample_data_*
+resnet18.onnx
+resnet18.onnx.data
+resnet18_quant.onnx
