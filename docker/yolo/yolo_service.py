@@ -168,7 +168,7 @@ def main():
             # 显示状态信息
             status = f"MQTT: {MQTT_BROKER}:{MQTT_PORT} | Topic: {MQTT_TOPIC}"
             cv2.putText(frame, status, (10, 30),
-                       cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
+                        cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
             cv2.imshow('EdgeAI-YOLO Detector', frame)
             
             if cv2.waitKey(1) & 0xFF == ord('q'):
