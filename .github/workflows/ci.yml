@@ -53,11 +53,11 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r api/requirements-api.txt
-          pip install pytest pytest-cov
+          pip install pytest pytest-cov httpx
       
       - name: 运行单元测试
         run: |
-          pytest api/test_api.py -v --cov=api
+          pytest api/tests/ -v --cov=api
         continue-on-error: false  # 测试失败则工作流失败
 
   # ==================== 3. Docker 构建与部署（可选，网络通时启用） ====================
