@@ -1,0 +1,4 @@
+# Flask Dashboard 依赖
+flask>=2.3.0
+waitress>=2.1.0
+paho-mqtt>=1.6.0

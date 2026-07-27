@@ -1,0 +1,11 @@
+# EdgeAI Unified Server 依赖
+# FastAPI: 现代异步 Web 框架（自动生成 Swagger 文档）
+fastapi>=0.104.0
+uvicorn[standard]>=0.24.0   # ASGI 生产服务器
+python-multipart>=0.0.6     # 文件上传支持
+jinja2>=3.1.0               # HTML 模板渲染（Dashboard 面板）
+ultralytics>=8.0.0          # YOLOv8 推理引擎
+opencv-python-headless>=4.5.0
+numpy>=1.21.0
+Pillow>=9.0.0
+paho-mqtt>=1.6.0           # MQTT 实时告警订阅

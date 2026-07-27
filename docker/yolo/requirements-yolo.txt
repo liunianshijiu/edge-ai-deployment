@@ -1,0 +1,7 @@
+# YOLO 检测服务依赖
+# 注意: 容器化版本使用 tflite_runtime 推理(不需要 PyTorch)
+#       比 ultralytics+torch 节省约 2GB 镜像空间
+tflite-runtime>=2.10.0      # TFLite 轻量推理引擎(不含训练功能)
+opencv-python-headless>=4.5.0
+paho-mqtt>=1.6.0
+numpy>=1.21.0

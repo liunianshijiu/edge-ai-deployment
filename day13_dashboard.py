@@ -2,6 +2,7 @@ from flask import Flask, jsonify
 import paho.mqtt.client as mqtt
 import threading
 import json
+from waitress import serve
 
 # ======= 共享数据：列表，存最近 50 条告警 =======
 alerts = []
@@ -59,4 +60,4 @@ threading.Thread(target=mqtt_listener, daemon=True).start()
 # 启动 Flask 服务器
 if __name__ == '__main__':
     print("Dashboard 启动: http://127.0.0.1:5000")
-    app.run(host='0.0.0.0', port=5000, debug=False)
+    serve(app, host='0.0.0.0', port=5000, threads=4)

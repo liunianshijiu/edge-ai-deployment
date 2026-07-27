@@ -1,0 +1,36 @@
+# ============================================================
+#  Docker 构建忽略文件
+#  避免将不必要的文件复制进镜像，减小体积、加快构建
+# ============================================================
+
+# Python 虚拟环境
+edgeai_env/
+__pycache__/
+*.pyc
+*.pyo
+
+# Git
+.git/
+.gitignore
+
+# IDE
+.vscode/
+.idea/
+
+# 大型模型/数据（不需要打进镜像的）
+yolov8n.pt              # PyTorch 原始模型(6MB)，容器用 TFLite 版本
+mobilenet_v2*.tflite     # 实验用旧模型
+resnet18*.onnx           # 实验用旧模型
+bus.jpg                  # 测试图片
+calibration_*.npy        # 校准数据
+out.txt                  # 临时输出
+
+# WSL 安装包
+wsl_*.msi
+dl_wsl.ps1
+download_wsl.ps1
+wsl_dl_result.txt
+
+# 日志和临时文件
+*.log
+.DS_Store

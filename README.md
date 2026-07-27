@@ -79,3 +79,6 @@ day10_yolo_camera.py	YOLO 摄像头检测
 day11_mqtt_test.py	MQTT 发布/订阅测试
 day12_yolo_mqtt.py	YOLO + MQTT 实时告警
 day13_dashboard.py	Flask 告警面板
+api/edgeai_server.py	**FastAPI 统一服务器**（API + Dashboard + 实时监控）
+.github/workflows/ci.yml	**GitHub Actions CI/CD**（代码检查 + 单元测试 + Docker 部署）
+CHANGELOG.md	项目变更日志（用于 Release 生成）
