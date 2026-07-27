@@ -11,7 +11,7 @@ Flask 告警仪表盘 - 容器化版本
 import os
 import json
 import threading
-from flask import Flask, render_template_string
+from flask import Flask, render_template_string, jsonify
 from waitress import serve
 import paho.mqtt.client as mqtt
 
@@ -105,7 +105,7 @@ def health():
 # ==================== MQTT 订阅者 ====================
 def mqtt_listener():
     """后台线程：连接 MQTT Broker 并持续监听告警"""
-    
+
     def on_connect(client, userdata, flags, rc):
         if rc == 0:
             print(f"[MQTT] 已连接到 {MQTT_BROKER}:{MQTT_PORT}")
@@ -113,7 +113,7 @@ def mqtt_listener():
             print(f"[MQTT] 订阅主题: {MQTT_TOPIC}")
         else:
             print(f"[MQTT] 连接失败，错误码: {rc}")
-    
+
     def on_message(client, userdata, msg):
         try:
             data = json.loads(msg.payload)
@@ -122,23 +122,23 @@ def mqtt_listener():
                 'type': data.get('type', 'unknown'),
                 'conf': data.get('confidence', 0)
             })
-            
+
             # 防止内存无限增长
             if len(alerts) > MAX_ALERTS:
                 alerts.pop(0)
-                
+
             print(f"[收到] {data.get('type')} ({data.get('confidence', 0):.0%})")
-        
+
         except json.JSONDecodeError:
             print("[错误] 无效的 JSON 数据")
-    
+
     client = mqtt.Client(client_id='dashboard_sub')
     client.on_connect = on_connect
     client.on_message = on_message
-    
+
     # 支持断线重连
     client.reconnect_delay_set(min_delay=1, max_delay=30)
-    
+
     try:
         client.connect(MQTT_BROKER, MQTT_PORT, keepalive=60)
         client.loop_forever()
@@ -152,11 +152,11 @@ def mqtt_listener():
 # ==================== 启动入口 ====================
 if __name__ == '__main__':
     import time
-    
+
     # 启动 MQTT 监听线程
     mqtt_thread = threading.Thread(target=mqtt_listener, daemon=True)
     mqtt_thread.start()
     print(f"[Dashboard] 启动中... 端口: {WEB_PORT}")
-    
+
     # 启动 Waitress 生产服务器
     serve(app, host='0.0.0.0', port=WEB_PORT, threads=4)

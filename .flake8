@@ -1,0 +1,4 @@
+[flake8]
+max-line-length = 120
+extend-ignore = E501,W293,W291,W605,F541,F824,E231,E302,F401,E305,E402,E401
+exclude = .git,__pycache__,.edgeai_env,venv,node_modules
